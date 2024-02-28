@@ -8,7 +8,41 @@ const url = 'http://localhost:3000'
 
 function App() {
   const [ flashcardCollection, setFlashcardCollection] = useState([])
-  console.log('flashcardCollection',flashcardCollection)
+  
+
+
+    const [createClick, setCreateClick] = useState(false);
+    const [ studyClick, setStudyClick] = useState(false);
+    const [testClick, setTestClick] = useState(false);
+    const [viewCollectionClick, setViewCollection] = useState(false);
+
+    function handleClick(id){
+        if(id === 'create') {
+          setCreateClick(true)
+          setStudyClick(false)
+          setTestClick(false)
+          setViewCollection(false)
+        };
+        if(id === 'study') {
+          setCreateClick(false)
+          setStudyClick(true)
+          setTestClick(false)
+          setViewCollection(false)
+        }
+        if(id === 'test') {
+          setCreateClick(false)
+          setStudyClick(false)
+          setTestClick(true)
+          setViewCollection(false)
+        }
+        if(id === 'view') {
+          setCreateClick(false)
+          setStudyClick(false)
+          setTestClick(false)
+          setViewCollection(true)
+        }
+    }
+console.log(createClick, studyClick, testClick, viewCollectionClick)
 
   const handleFetch = () =>{
     fetch(url +'/flashcards')
@@ -48,8 +82,14 @@ function App() {
       <Header></Header>
       
       <main>
-      <NavBar></NavBar>
-      <Display addFlashcard={addFlashcard}></Display>
+      <NavBar handleClick={handleClick}></NavBar>
+      <Display 
+      addFlashcard={addFlashcard} 
+      createClick={createClick} 
+      testClick={testClick} 
+      viewCollectionClick={viewCollectionClick}
+      studyClick={studyClick}
+      ></Display>
       </main>
     </>
   )
