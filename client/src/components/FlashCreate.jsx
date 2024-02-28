@@ -1,7 +1,7 @@
 import './CSS/FlashCreate.css'
 import { useState } from 'react';
 
-export default function FlashCreate(){
+export default function FlashCreate({addFlashcard}){
    const [question, setQuestion] = useState('');
    const [correctAnswer, setCorrectAnswer] = useState('');
    const [wrongAnswer_1, setWrongAnswer_1] = useState('');
@@ -19,7 +19,7 @@ export default function FlashCreate(){
       }
 
       //direct here newFlashCard to database
-
+      addFlashcard(newFlashCard)
       setQuestion('');
       setCorrectAnswer('');
       setWrongAnswer_1('');
