@@ -1,0 +1,18 @@
+* {
+    margin: 0 auto;
+    
+}
+
+header {
+    background-color: rgb(239, 146, 53);
+    height: 3em;
+    padding: 2em
+}
+h1 {
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: .5em;
+    color:bisque;
+    text-align: center
+    
+}

@@ -1,0 +1,69 @@
+.flashcard {
+   display: flex;
+   flex-direction: row;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(187, 238, 187);
+    margin-top: 3em;
+    margin-left:2em;
+    padding-top: 2em;
+    padding-bottom:2em;
+    width: 30em;
+    border-radius: 15px 15px;
+}
+
+form label{
+    padding:.8em;
+    font-size: small;
+}
+.question {
+    display: flex;
+    flex-direction: column;
+}
+.answer{
+    display: flex;
+    flex-direction: column;
+}
+.answer input {
+    width: 20em;
+    border: none;
+    padding: .5em;
+}
+.question input {
+    width: 20em;
+    border: none;
+    padding: .5em;
+}
+/* .btn_box {
+    display:flex;
+    flex-direction: row;
+    margin-left:3em;
+    padding-top: 2em;
+    width: 20em;
+
+} */
+
+.btn_box button {
+    font-weight: 600;
+    
+}
+
+section {
+    margin-top: 3em;
+    padding-top: 2em;
+    padding-left: 1em;
+    padding-right:2em;
+}
+
+.section_question {
+    background-color: rgb(193, 241, 193);
+    padding: 2em;
+    border-radius: 15px 15px;
+    margin-bottom: 3em;;
+}
+.section_options{
+    display: flex;
+    flex-direction: column;
+}

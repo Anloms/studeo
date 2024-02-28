@@ -1,0 +1,18 @@
+
+.display{
+    margin-top: 2em;
+    background-color: antiquewhite;
+    margin-right: 0;
+    width: 100%;
+    margin-left: 3em;
+    border-top-left-radius: 15px 15px;
+}
+
+.display h1 {
+    text-align: center;
+    padding-top: 8em;
+    padding-left: 2em;
+    padding-right: 2em;
+    color: rgb(161, 123, 123);
+
+}
