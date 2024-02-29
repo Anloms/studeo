@@ -1,13 +1,11 @@
-import './CSS/FlashTest.css'
 
-export default function FlashTest(){
+import DropDownMenu from './DropDownMenu'
+
+export default function FlashTest({collectionList}) {
+
     return (
         <>
-        <div>
-
-        <h2>Flash tests soon to be here...</h2>
-        </div>
-        
+        <DropDownMenu collectionList={collectionList}></DropDownMenu>
         </>
     )
 }

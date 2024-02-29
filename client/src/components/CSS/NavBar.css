@@ -2,14 +2,13 @@
 .nav_container {
     display: flex;
     flex-direction: column;
-    height: inherit;
     background-color: rgb(178, 244, 178);
     margin-top: 2em;
     padding-top: 5em;
     margin-left:0;
     padding-left: 3em;
     padding-right: 3em;
-    height: 45em;
+    height: inherit;
     border-top-right-radius: 15px 15px;
     font-family: '"Expletus Sans", sans-serif';
 

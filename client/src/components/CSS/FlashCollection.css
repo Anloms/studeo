@@ -1,6 +1,32 @@
+.all_display {
+    display: flex;
+    flex-direction: column;
+ 
+}
 
-h2 {
-    text-align: center;
-    padding-top:10em;
-    color:#0a5c0a;
+.collections_yard {
+    background-color: rgb(247, 216, 152);
+    width:100%;
+    height:30em;
+    margin:2em;
+    border-radius:  15px 15px;
+    overflow-y: scroll;
+}
+.individual_collection_set {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.individual_flash_set {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.flashcard_solo {
+    height: 10em;
+    width: 10em;
+    overflow-y: hidden;
 }

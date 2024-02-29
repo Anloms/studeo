@@ -5,9 +5,11 @@
 form{
     display: flex;
     flex-direction: column;
+    text-align: center;
     background-color: rgb(187, 238, 187);
-    margin-top: 3em;
-    margin-left:2em;
+    margin-top: 10%;
+    margin-left:10%;
+    margin-right:5%;
     padding-top: 2em;
     padding-bottom:2em;
     width: 30em;
@@ -27,11 +29,14 @@ form label{
     flex-direction: column;
 }
 .answer input {
+    align-self: center;
     width: 20em;
     border: none;
     padding: .5em;
+    margin-bottom: 10%;
 }
 .question input {
+    align-self: center;
     width: 20em;
     border: none;
     padding: .5em;
@@ -63,7 +68,18 @@ section {
     border-radius: 15px 15px;
     margin-bottom: 3em;;
 }
+.section_question_alert {
+    background-color: rgb(239, 146, 53);
+    padding: 2em;
+    border-radius: 15px 15px;
+    margin-bottom: 3em;;
+    
+}
 .section_options{
     display: flex;
     flex-direction: column;
+}
+
+.just_create_btn {
+    width: 30em;
 }

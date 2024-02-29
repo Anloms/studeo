@@ -15,7 +15,11 @@ function App() {
     const [ studyClick, setStudyClick] = useState(false);
     const [testClick, setTestClick] = useState(false);
     const [viewCollectionClick, setViewCollection] = useState(false);
+    const [topMost, setTopMost] = useState('');
+    const [collectionList, setCollectionList] = useState('');
+   
 
+    
     function handleClick(id){
         if(id === 'create') {
           setCreateClick(true)
@@ -42,7 +46,7 @@ function App() {
           setViewCollection(true)
         }
     }
-console.log(createClick, studyClick, testClick, viewCollectionClick)
+
 
   const handleFetch = () =>{
     fetch(url +'/flashcards')
@@ -53,7 +57,10 @@ console.log(createClick, studyClick, testClick, viewCollectionClick)
       throw new TypeError({message: 'You are not getting json'})
     })
     .then(data=>{
-      console.log("fetching data GET",data)
+    
+      const topMost = data.slice(data.length-1, data.length)
+      setTopMost(topMost)
+      setFlashcardCollection(data)
       //handle data later
     }).catch((error)=>{
       console.log('We have an error here', error)
@@ -69,12 +76,44 @@ console.log(createClick, studyClick, testClick, viewCollectionClick)
      body: JSON.stringify(flash)
     })
     .then(()=>{
-      setFlashcardCollection([...flashcardCollection, flash])
+      // setFlashcardCollection([...flashcardCollection, flash])
       handleFetch()
     })
   }
+
+  const handleFetchCollection = () =>{
+    fetch(url +'/collections')
+    .then(response =>{
+      if(response.headers.get('Content-Type').includes('application/json')){
+        return response.json()
+      }
+      throw new TypeError({message: 'You are not getting json'})
+    })
+    .then(data=>{
+      setCollectionList(data)
+      //handle data later
+    }).catch((error)=>{
+      console.log('We have an error here', error)
+    })
+  }
+
+  const addCollection = (flash) =>{
+    fetch(url +'/collections',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+    },
+     body: JSON.stringify(flash)
+    })
+    .then(()=>{
+      handleFetchCollection()
+    })
+  }
+
+  
   useEffect(()=>{
     handleFetch()
+    handleFetchCollection()
   },[]) 
 
   return (
@@ -85,10 +124,15 @@ console.log(createClick, studyClick, testClick, viewCollectionClick)
       <NavBar handleClick={handleClick}></NavBar>
       <Display 
       addFlashcard={addFlashcard} 
+      addCollection={addCollection}
       createClick={createClick} 
       testClick={testClick} 
       viewCollectionClick={viewCollectionClick}
       studyClick={studyClick}
+      topMost={topMost}
+      collectionList={collectionList}
+      flashcardCollection={flashcardCollection}
+    
       ></Display>
       </main>
     </>

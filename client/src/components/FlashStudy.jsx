@@ -1,10 +1,11 @@
-import './CSS/FlashStudy.css'
 
-export default function FlashStudy() {
+import DropDownMenu from './DropDownMenu'
+
+export default function FlashStudy({collectionList}) {
 
     return (
         <>
-        <h2> Flashcard toggle soon to be here...</h2>
+        <DropDownMenu collectionList={collectionList} name='Select Collection'></DropDownMenu>
         </>
     )
 }

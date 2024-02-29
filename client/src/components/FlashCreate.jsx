@@ -1,36 +1,103 @@
 import './CSS/FlashCreate.css'
 import { useState } from 'react';
+import DropDownMenu from './DropDownMenu';
 
-export default function FlashCreate({addFlashcard}){
+
+export default function FlashCreate(
+  {
+    addFlashcard, 
+    addCollection,
+    collectionList, 
+    handleDropDown_addId,
+    handleClickExistingCollection_Btn,
+    collectionId
+  }){
    const [question, setQuestion] = useState('');
    const [correctAnswer, setCorrectAnswer] = useState('');
-   const [wrongAnswer_1, setWrongAnswer_1] = useState('');
-   const [wrongAnswer_2, setWrongAnswer_2] = useState('');
-   const [wrongAnswer_3, setWrongAnswer_3] = useState('');
+   const [collection_name, setCollection_name] = useState('')
+   const [createClicked, setCreateClicked] = useState(false);
+   const [newCollectionClick, setNewCollectionClick] = useState(false);
+   const [oldCollectionClick, setOldCollectionClick] = useState(false)
    
-   function handleSubmit(event){
+   function conditionalStyle(){
+    if(createClicked===true){
+      return 'section_question_alert'
+    } else{
+      return 'section_question'
+    }
+   }
+   function handleClick(){
+    if(newCollectionClick === true){
+      setNewCollectionClick(false)
+    }else{
+      setNewCollectionClick(true)
+    }
+   }
+
+   function handleClick_oldCollection(){
+    if(oldCollectionClick===true){
+      setOldCollectionClick(false)
+    }else{
+      setOldCollectionClick(true)
+    }
+   }
+
+    function handleSubmit_flashcard(event){
       event.preventDefault()
       const newFlashCard = {
         question,
-        correctAnswer,
-        wrongAnswer_1,
-        wrongAnswer_2,
-        wrongAnswer_3
+        correctAnswer
       }
+      setCreateClicked(true)
+      //direct newFlashCard to database
 
-      //direct here newFlashCard to database
-      addFlashcard(newFlashCard)
-      setQuestion('');
-      setCorrectAnswer('');
-      setWrongAnswer_1('');
-      setWrongAnswer_2('');
-      setWrongAnswer_3('');
+      // addFlashcard(newFlashCard)
+      // setQuestion('');
+      // setCorrectAnswer('');
 
+      if(newCollectionClick==true){
+        const newCollection={
+          collection_name
+        }
+     
+        addFlashcard(newFlashCard);
+        addCollection(newCollection);
+        const idValueCollection = newCollection._id;
+        const idValueFlashcard = newFlashCard._id;
+        handleClickExistingCollection_Btn();
+        handleClick();
+        setQuestion('');
+        setCorrectAnswer('');
+       
+      }
+      else if(oldCollectionClick===true){
+        console.log("collectionId in else if (add to existing collection)", collectionId)
+        addFlashcard(newFlashCard);
+        const idValueCollection = collectionId;
+        const idValueFlashcard = newFlashCard._id;
+        console.log("flashcardId in else if (add to existing collection)", collectionId)
+        handleClickExistingCollection_Btn();
+        handleClick();
+        setQuestion('');
+        setCorrectAnswer('');
+      }
     }
+    console.log(collectionId)
+
+    // function handleSubmit_Collection(event){
+    //   event.preventDefault()
+    //   const newCollection={
+    //     collection_name
+    //   }
+    //   addCollection(newCollection)
+    //   handleClick()
+
+    // }
+   
     return (
       <>
         <div className="flashcard">
-       <form onSubmit={handleSubmit}>
+       <form onSubmit={handleSubmit_flashcard}>
 
         <div className="question">
             <label>phrase your question</label>
@@ -40,31 +107,40 @@ export default function FlashCreate({addFlashcard}){
             <label> here give a correct answer</label>
             <input type='text' value={correctAnswer} onChange={(e)=> setCorrectAnswer(e.target.value)}></input>
         </div>
-        <div className="answer">
-            <label>here give a wrong answer</label>
-            <input type='text' value={wrongAnswer_1} onChange={(e)=> setWrongAnswer_1(e.target.value)}></input>
-        </div>
-        <div className="answer">
-            <label>here give a wrong answer</label>
-            <input type='text' value={wrongAnswer_2} onChange={(e)=> setWrongAnswer_2(e.target.value)}></input>
-        </div>
-        <div className="answer">
-            <label>here give a wrong answer</label>
-            <input type="text" value={wrongAnswer_3} onChange={(e)=> setWrongAnswer_3(e.target.value)}></input>
-        </div>
+
         <div className='btn_box'>
             <button type="submit">create</button>
             <button>discard</button>
-            <button>autofill</button>
         </div>
        </form>
        <section>
-        <div className='section_question'>
+        <div className={conditionalStyle()} >
             <p>Where would you like to add your flashcards?</p>
         </div>
         <div className='section_options'>
-            <button>existing collection</button>
-            <button>new collection</button>
+            <div>
+              <button className='just_create_btn'>Just Create</button>
+            </div>
+            <DropDownMenu 
+            collectionList={collectionList} 
+            handleDropDown_addId={handleDropDown_addId} 
+            handleClickExistingCollection_Btn={handleClickExistingCollection_Btn} 
+            handleClick_oldCollection={handleClick_oldCollection}
+            name='Existing Collection'></DropDownMenu>
+            {
+              newCollectionClick ?
+               (<>
+               <form onSubmit={handleSubmit_flashcard}>
+                <label>
+                  Add name of your collection
+                </label>
+                <input value={collection_name} onChange={(e)=>setCollection_name(e.target.value)}></input>
+               <button type="submit">new collection</button>
+               </form>
+               </>):
+               (<><button onClick={handleClick}>new collection</button></>)
+            }
+            
         </div>
        </section>
         </div>
