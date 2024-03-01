@@ -15,9 +15,12 @@ export default function Display(
     createClick, 
     studyClick, 
     testClick,
-    topMost,
+    topMost_Flashcard,
+    topMost_Collection,
     collectionList,
-    flashcardCollection
+    flashcardCollection,
+    resetTopMost_flashcard,
+    resetTopMost_collection
     }
 ){
     const [collectionId, setCollectionId] = useState('')
@@ -26,10 +29,14 @@ export default function Display(
     function handleDropDown_addId(dropdownId){
      setCollectionId(()=>dropdownId)
     }
-    console.log("current value of Collection ID", collectionId)
 
-    const addToExistingCollection = (id, flashID) => {
+   
+
+    const updateCollection = (flashID, id) => {
+      
         console.log('id ===> ',id)
+        console.log('flashId ====> ', flashID)
+
         fetch(url+`/collections/${id}/edit`, {
           method: 'PUT',
           headers: {
@@ -46,12 +53,22 @@ export default function Display(
           console.log("error in your addToExistingCollection", error)
         })
       }
-  
-      function handleClickExistingCollection_Btn(){
-        addToExistingCollection(collectionId, topMost[0]._id)
-        setCollectionId('')
+    //  console.log(topMost_Collection, '<=== topMost_Collection')
+    //  console.log(topMost_Collection._id, '<===topMost_Collection')
+    //  console.log(typeof topMost_Collection)
+    //  console.log(typeof topMost_Collection._id)
+    //  console.log(topMost_Flashcard, '<==== topMost_Flashcard')
+    //  console.log(topMost_Flashcard._id, '<===== topMost_Flashcard._id')
+      function handleCollectionUpdate(flashId, collectionID){
+        console.log(flashId)
         
-      }
+          updateCollection(flashId, collectionID);
+          resetTopMost_collection()
+          resetTopMost_flashcard()
+           
+        }
+       
+        
 
     return (
         <div className='display'>
@@ -61,16 +78,20 @@ export default function Display(
         addFlashcard={addFlashcard} 
         addCollection={addCollection}
         collectionList={collectionList} 
-        handleClickExistingCollection_Btn={handleClickExistingCollection_Btn} 
+        handleCollectionUpdate={handleCollectionUpdate} 
         handleDropDown_addId={handleDropDown_addId}
         collectionId={collectionId}
+        topMost_Collection={topMost_Collection}
+        topMost_Flashcard={topMost_Flashcard}
+        resetTopMost_collection={resetTopMost_collection}
+        resetTopMost_flashcard={resetTopMost_flashcard}
         ></FlashCreate>)}
 
         {studyClick && (
         <FlashStudy 
         addFlashcard={addFlashcard} 
         collectionList={collectionList} 
-        handleClickExistingCollection_Btn={handleClickExistingCollection_Btn} 
+        handleCollectionUpdate={handleCollectionUpdate} 
         handleDropDown_addId={handleDropDown_addId}
         ></FlashStudy>)}
 
@@ -78,7 +99,7 @@ export default function Display(
         <FlashTest 
         addFlashcard={addFlashcard} 
         collectionList={collectionList} 
-        handleClickExistingCollection_Btn={handleClickExistingCollection_Btn} 
+        handleCollectionUpdate={handleCollectionUpdate} 
         handleDropDown_addId={handleDropDown_addId}
         ></FlashTest>)}
 

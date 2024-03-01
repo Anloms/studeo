@@ -15,10 +15,21 @@ function App() {
     const [ studyClick, setStudyClick] = useState(false);
     const [testClick, setTestClick] = useState(false);
     const [viewCollectionClick, setViewCollection] = useState(false);
-    const [topMost, setTopMost] = useState('');
-    const [collectionList, setCollectionList] = useState('');
-   
 
+    const [topMost_Flashcard, setTopMost_Flashcard] = useState('');
+    const [topMost_Collection, setTopMost_Collection] = useState('');
+
+    const [collectionList, setCollectionList] = useState('');
+
+
+    function resetTopMost_flashcard(){
+        setTopMost_Flashcard('')
+      
+    }
+
+    function resetTopMost_collection(){
+        setTopMost_Collection('')
+    }
     
     function handleClick(id){
         if(id === 'create') {
@@ -59,26 +70,28 @@ function App() {
     .then(data=>{
     
       const topMost = data.slice(data.length-1, data.length)
-      setTopMost(topMost)
+      setTopMost_Flashcard(topMost[0])
       setFlashcardCollection(data)
-      //handle data later
+      
     }).catch((error)=>{
       console.log('We have an error here', error)
     })
   }
 
-  const addFlashcard = (flash) =>{
-    fetch(url +'/flashcards',{
+  const addFlashcard = async (flash) =>{
+    const res =  await fetch(url +'/flashcards',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-    },
-     body: JSON.stringify(flash)
+      },
+      body: JSON.stringify(flash)
     })
-    .then(()=>{
-      // setFlashcardCollection([...flashcardCollection, flash])
-      handleFetch()
-    })
+    
+    console.log(res)
+    setFlashcardCollection([...flashcardCollection, flash])
+    handleFetch()
+    return await res.json()
+   
   }
 
   const handleFetchCollection = () =>{
@@ -90,6 +103,8 @@ function App() {
       throw new TypeError({message: 'You are not getting json'})
     })
     .then(data=>{
+      const topMost = data.slice(data.length-1, data.length)
+      setTopMost_Collection(topMost[0])
       setCollectionList(data)
       //handle data later
     }).catch((error)=>{
@@ -97,17 +112,19 @@ function App() {
     })
   }
 
-  const addCollection = (flash) =>{
-    fetch(url +'/collections',{
+  const addCollection = async(flash) =>{
+    const res = await fetch(url +'/collections',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
     },
      body: JSON.stringify(flash)
     })
-    .then(()=>{
-      handleFetchCollection()
-    })
+    // .then(()=>{
+    //   handleFetchCollection()
+    // })
+    handleFetchCollection()
+    return await res.json()
   }
 
   
@@ -129,9 +146,12 @@ function App() {
       testClick={testClick} 
       viewCollectionClick={viewCollectionClick}
       studyClick={studyClick}
-      topMost={topMost}
+      topMost_Flashcard={topMost_Flashcard}
+      topMost_Collection={topMost_Collection}
       collectionList={collectionList}
       flashcardCollection={flashcardCollection}
+      resetTopMost_collection={resetTopMost_collection}
+      resetTopMost_flashcard={resetTopMost_flashcard}
     
       ></Display>
       </main>
