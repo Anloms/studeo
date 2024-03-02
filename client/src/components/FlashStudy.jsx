@@ -1,11 +1,9 @@
+import DropDownMenu from './DropDownMenu';
 
-import DropDownMenu from './DropDownMenu'
-
-export default function FlashStudy({collectionList}) {
-
+export default function FlashStudy({ collectionList }) {
     return (
         <>
-        <DropDownMenu collectionList={collectionList} name='Select Collection'></DropDownMenu>
+        <DropDownMenu collectionList={collectionList} name="Select Collection"></DropDownMenu>
         </>
-    )
+    );
 }

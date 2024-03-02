@@ -1,11 +1,9 @@
+import DropDownMenu from './DropDownMenu';
 
-import DropDownMenu from './DropDownMenu'
-
-export default function FlashTest({collectionList}) {
-
-    return (
-        <>
-        <DropDownMenu collectionList={collectionList}></DropDownMenu>
-        </>
-    )
+export default function FlashTest({ collectionList }) {
+  return (
+    <>
+      <DropDownMenu collectionList={collectionList}></DropDownMenu>
+    </>
+  );
 }

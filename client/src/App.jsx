@@ -1,84 +1,65 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import Header from './components/Header'
-import NavBar from './components/NavBar'
-import Display from './components/Display'
+import { useEffect, useState } from 'react';
+import './App.css';
+import Header from './components/Header';
+import NavBar from './components/NavBar';
+import Display from './components/Display';
 
-const url = 'http://localhost:3000'
+const url = 'http://localhost:3000';
 
 function App() {
-  const [ flashcardCollection, setFlashcardCollection] = useState([])
+  const [ flashcardCollection, setFlashcardCollection] = useState([]);
+
+  const [createClick, setCreateClick] = useState(false);
+  const [ studyClick, setStudyClick] = useState(false);
+  const [testClick, setTestClick] = useState(false);
+  const [viewCollectionClick, setViewCollection] = useState(false);
   
-
-
-    const [createClick, setCreateClick] = useState(false);
-    const [ studyClick, setStudyClick] = useState(false);
-    const [testClick, setTestClick] = useState(false);
-    const [viewCollectionClick, setViewCollection] = useState(false);
-
-    const [topMost_Flashcard, setTopMost_Flashcard] = useState('');
-    const [topMost_Collection, setTopMost_Collection] = useState('');
-
-    const [collectionList, setCollectionList] = useState('');
-
-
-    function resetTopMost_flashcard(){
-        setTopMost_Flashcard('')
+  const [collectionList, setCollectionList] = useState('');
       
-    }
-
-    function resetTopMost_collection(){
-        setTopMost_Collection('')
-    }
-    
     function handleClick(id){
         if(id === 'create') {
-          setCreateClick(true)
-          setStudyClick(false)
-          setTestClick(false)
-          setViewCollection(false)
+          setCreateClick(true);
+          setStudyClick(false);
+          setTestClick(false);
+          setViewCollection(false);
         };
         if(id === 'study') {
-          setCreateClick(false)
-          setStudyClick(true)
-          setTestClick(false)
-          setViewCollection(false)
-        }
+          setCreateClick(false);
+          setStudyClick(true);
+          setTestClick(false);
+          setViewCollection(false);
+        };
         if(id === 'test') {
-          setCreateClick(false)
-          setStudyClick(false)
-          setTestClick(true)
-          setViewCollection(false)
-        }
+          setCreateClick(false);
+          setStudyClick(false);
+          setTestClick(true);
+          setViewCollection(false);
+        };
         if(id === 'view') {
-          setCreateClick(false)
-          setStudyClick(false)
-          setTestClick(false)
-          setViewCollection(true)
-        }
-    }
+          setCreateClick(false);
+          setStudyClick(false);
+          setTestClick(false);
+          setViewCollection(true);
+        };
+    };
 
-
-  const handleFetch = () =>{
+  const handleFetch = () => {
     fetch(url +'/flashcards')
-    .then(response =>{
+    .then(response => {
       if(response.headers.get('Content-Type').includes('application/json')){
-        return response.json()
-      }
-      throw new TypeError({message: 'You are not getting json'})
+        return response.json();
+      };
+      throw new TypeError({ message: 'You are not getting json' });
     })
-    .then(data=>{
-    
-      const topMost = data.slice(data.length-1, data.length)
-      setTopMost_Flashcard(topMost[0])
-      setFlashcardCollection(data)
+    .then(data => {
+      setFlashcardCollection(data);
       
-    }).catch((error)=>{
+    }).catch((error) => {
       console.log('We have an error here', error)
-    })
-  }
+    });
+  };
 
-  const addFlashcard = async (flash) =>{
+  const addFlashcard = async (flash) => {
     const res =  await fetch(url +'/flashcards',{
       method: 'POST',
       headers: {
@@ -87,51 +68,46 @@ function App() {
       body: JSON.stringify(flash)
     })
     
-    console.log(res)
-    setFlashcardCollection([...flashcardCollection, flash])
-    handleFetch()
-    return await res.json()
-   
-  }
+    console.log(res);
+    setFlashcardCollection([...flashcardCollection, flash]);
+    handleFetch();
+    return await res.json();   
+  };
 
-  const handleFetchCollection = () =>{
+  const handleFetchCollection = () => {
     fetch(url +'/collections')
-    .then(response =>{
+    .then(response => {
       if(response.headers.get('Content-Type').includes('application/json')){
-        return response.json()
+        return response.json();
       }
-      throw new TypeError({message: 'You are not getting json'})
+      throw new TypeError({ message: 'You are not getting json' });
     })
-    .then(data=>{
-      const topMost = data.slice(data.length-1, data.length)
-      setTopMost_Collection(topMost[0])
-      setCollectionList(data)
-      //handle data later
-    }).catch((error)=>{
-      console.log('We have an error here', error)
-    })
-  }
+    .then(data => {
 
-  const addCollection = async(flash) =>{
+      setCollectionList(data);
+
+    }).catch((error)=>{
+      console.log('We have an error here', error);
+    });
+  };
+
+  const addCollection = async (flash) =>{
     const res = await fetch(url +'/collections',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
     },
      body: JSON.stringify(flash)
-    })
-    // .then(()=>{
-    //   handleFetchCollection()
-    // })
-    handleFetchCollection()
-    return await res.json()
-  }
+    });
+   
+    handleFetchCollection();
+    return await res.json();
+  };
 
-  
-  useEffect(()=>{
-    handleFetch()
-    handleFetchCollection()
-  },[]) 
+  useEffect(() => {
+    handleFetch();
+    handleFetchCollection();
+  }, []);
 
   return (
     <>
@@ -146,17 +122,12 @@ function App() {
       testClick={testClick} 
       viewCollectionClick={viewCollectionClick}
       studyClick={studyClick}
-      topMost_Flashcard={topMost_Flashcard}
-      topMost_Collection={topMost_Collection}
       collectionList={collectionList}
-      flashcardCollection={flashcardCollection}
-      resetTopMost_collection={resetTopMost_collection}
-      resetTopMost_flashcard={resetTopMost_flashcard}
-    
+      flashcardCollection={flashcardCollection} 
       ></Display>
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
