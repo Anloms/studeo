@@ -3,7 +3,7 @@ import './CSS/FlashStudy.css';
 import FlashQuiz from './FlashQuiz';
 import DropDownMenu from './DropDownMenu';
 import Manual_Auto_Btn from './buttons/Manual_Auto_Btn';
-
+import FlashTest from './FlashTest';
 
 export default function FlashStudy({ 
     flashcardCollection, 
@@ -53,7 +53,14 @@ export default function FlashStudy({
         collectionList={collectionList}
         flashcardCollection={flashcardCollection}
         ></FlashQuiz>}
-        {(start && identifier==='Test') && (<><p> Test will be here </p></>)}
+        {(start && identifier==='Test') && 
+        <FlashTest
+        selectedSet={selectedSet}
+        handleAuto={handleAuto}
+        handleManual={handleManual}
+        collectionList={collectionList}
+        flashcardCollection={flashcardCollection}
+        ></FlashTest>}
         {!start && (<div className="questionnaire">
             <form onSubmit={handleSubmit}>
                 <div className="form_layout">
