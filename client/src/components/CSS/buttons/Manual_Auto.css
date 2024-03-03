@@ -1,0 +1,13 @@
+.manual_auto_btn_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    margin-left: 5em;
+
+}
+
+.manual_auto_btn_container button {
+    border-radius: 45% 75%;
+    margin-top: 2em;
+    font-size: medium;
+}

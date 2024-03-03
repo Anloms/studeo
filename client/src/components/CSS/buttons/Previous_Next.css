@@ -1,0 +1,14 @@
+.btn_container {
+    width: 39em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.togglePrevious_btn,
+.toggleNext_btn {
+    width: 25em;
+    height: 5em;
+    font-size: medium;
+    font-weight: 600;
+}

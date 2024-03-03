@@ -44,7 +44,7 @@ function App() {
   }
 
   const handleFetch = () => {
-    fetch(`${url}/flashcards`)
+    fetch(url + `/flashcards`)
       .then((response) => {
         if (response.headers.get('Content-Type').includes('application/json')) {
           return response.json();
@@ -55,14 +55,14 @@ function App() {
         setFlashcardCollection(data);
       }).catch((error) => {
         console.log('We have an error here', error);
-      });
+      });     
   };
 
   const addFlashcard = async (flash) => {
     const res = await fetch(`${url}/flashcards`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(flash),
     });
@@ -74,7 +74,7 @@ function App() {
   };
 
   const handleFetchCollection = () => {
-    fetch(`${url}/collections`)
+    fetch(url + `/collections`)
       .then((response) => {
         if (response.headers.get('Content-Type').includes('application/json')) {
           return response.json();

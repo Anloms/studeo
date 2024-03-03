@@ -9,13 +9,15 @@ export default function FlashCreate({
   handleDropDown_addId,
   handleCollectionUpdate,
   collectionId,
+  oldCollectionClick,
+  handleClick_oldCollection
 }) {
   const [question, setQuestion] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [collection_name, setCollection_name] = useState('');
   const [createClicked, setCreateClicked] = useState(false);
   const [newCollectionClick, setNewCollectionClick] = useState(false);
-  const [oldCollectionClick, setOldCollectionClick] = useState(false);
+  // const [oldCollectionClick, setOldCollectionClick] = useState(false);
   const [justCreateClick, setJustCreateClick] = useState(false);
   const [addClick, setAddClick] = useState(false);
 
@@ -34,10 +36,10 @@ export default function FlashCreate({
       setNewCollectionClick(true);
     }
   }
-
-  function handleClick_oldCollection() {
-    setOldCollectionClick(true);
-  }
+  // const [oldCollectionClick, setOldCollectionClick] = useState(false);
+  // function handleClick_oldCollection() {
+  //   setOldCollectionClick(true);
+  // }
 
   // handlers
   function handleJustCreate() {
@@ -47,10 +49,8 @@ export default function FlashCreate({
     };
     addFlashcard(newFlashCard);
     setJustCreateClick(false);
-    resetTopMost_flashcard();
     setQuestion('');
     setCorrectAnswer('');
-
     setCreateClicked(false);
   }
 
@@ -62,15 +62,15 @@ export default function FlashCreate({
     const flashVar = await addFlashcard(newFlashCard);
     const collVar = await collectionId;
 
-    setOldCollectionClick(false);
+    handleClick_oldCollection();
     handleCollectionUpdate(flashVar._id, collVar);// change format of this function
-
+    
+    handleDropDown_addId()
     setQuestion('');
     setCorrectAnswer('');
-
     setCreateClicked(false);
   }
-
+  
   async function handleUpdate_newCollection() {
     const newFlashCard = {
       question,
@@ -87,6 +87,7 @@ export default function FlashCreate({
     handleCollectionUpdate(flashVar._id, collectionVar._id);
 
     // state reset
+    handleDropDown_addId()
     handleClick();
     setCreateClicked();
     setAddClick(false);
