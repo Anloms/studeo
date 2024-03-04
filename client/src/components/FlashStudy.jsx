@@ -65,6 +65,7 @@ export default function FlashStudy({
             <form onSubmit={handleSubmit}>
                 <div className="form_layout">
                     <div>
+                    <div className="dropdownBtn">
                     <DropDownMenu 
                 collectionList={collectionList}
                 oldCollectionClick={oldCollectionClick}
@@ -72,9 +73,11 @@ export default function FlashStudy({
                 handleDropDown_addId={handleDropDown_addId}
                 name="Select Collections"
                 ></DropDownMenu>
-               <button className="startBtn" onClick={handleStartBtn}>Start</button>   
-
                     </div>
+               <button className="startBtn" onClick={handleStartBtn}>Start</button>   
+                        
+                    </div>
+
                              
                <div className="manual_auto">
                <Manual_Auto_Btn
@@ -86,7 +89,7 @@ export default function FlashStudy({
             </form>
             <div className="selections">
                 <div>
-                    <p>Selected:</p>
+                    
                         <ul>
                         {selectedSet.map((value)=>{
                             let temp;
@@ -106,7 +109,7 @@ export default function FlashStudy({
                     </ul>
                 </div>
                 <div>
-                    <p>Selected: </p>
+                    {/* <p>Selected: </p> */}
                     {manual && (<p> manual</p>)}
                     {auto && (<p>  auto</p>)}                    
                 </div>

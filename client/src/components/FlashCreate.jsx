@@ -12,8 +12,7 @@ export default function FlashCreate({
   oldCollectionClick,
   handleClick_oldCollection
 }) {
-  const [question, setQuestion] = useState('');
-  const [correctAnswer, setCorrectAnswer] = useState('');
+  const [questionAnswer, setQuestionAnswer] = useState({question: '', answer: ''});
   const [collection_name, setCollection_name] = useState('');
   const [createClicked, setCreateClicked] = useState(false);
   const [newCollectionClick, setNewCollectionClick] = useState(false);
@@ -36,28 +35,28 @@ export default function FlashCreate({
       setNewCollectionClick(true);
     }
   }
-  // const [oldCollectionClick, setOldCollectionClick] = useState(false);
-  // function handleClick_oldCollection() {
-  //   setOldCollectionClick(true);
-  // }
-
+ 
   // handlers
   function handleJustCreate() {
+    let question = questionAnswer.question, correctAnswer = questionAnswer.answer;
+    
     const newFlashCard = {
       question,
-      correctAnswer,
+      correctAnswer
     };
     addFlashcard(newFlashCard);
     setJustCreateClick(false);
-    setQuestion('');
-    setCorrectAnswer('');
+ 
+    setQuestionAnswer({question: '', answer: ''})
     setCreateClicked(false);
   }
 
   async function handleUpdate_oldCollection() {
+    let question = questionAnswer.question, correctAnswer = questionAnswer.answer;
+    
     const newFlashCard = {
       question,
-      correctAnswer,
+      correctAnswer
     };
     const flashVar = await addFlashcard(newFlashCard);
     const collVar = await collectionId;
@@ -66,15 +65,18 @@ export default function FlashCreate({
     handleCollectionUpdate(flashVar._id, collVar);// change format of this function
     
     handleDropDown_addId()
-    setQuestion('');
-    setCorrectAnswer('');
+    // setQuestion('');
+    // setCorrectAnswer('');
+    setQuestionAnswer({question: '', answer: ''})
     setCreateClicked(false);
   }
   
   async function handleUpdate_newCollection() {
+    let question = questionAnswer.question, correctAnswer = questionAnswer.answer;
+    
     const newFlashCard = {
       question,
-      correctAnswer,
+      correctAnswer
     };
 
     const flashVar = await addFlashcard(newFlashCard);
@@ -91,8 +93,7 @@ export default function FlashCreate({
     handleClick();
     setCreateClicked();
     setAddClick(false);
-    setQuestion('');
-    setCorrectAnswer('');
+    setQuestionAnswer({question: '', answer: ''})
   }
 
   function handleSubmit(event) {
@@ -111,21 +112,22 @@ export default function FlashCreate({
   }
 
   return (
-    <div className="flashcard">
+    
       <form onSubmit={handleSubmit} id="formField">
-
+        <div className="create_discard_field">
         <div className="question">
           <label>phrase your question</label>
-          <input type="text" value={question} onChange={(e) => setQuestion(e.target.value)} />
+          <input type="text" value={questionAnswer.question} onChange={(e) => setQuestionAnswer({question: e.target.value})} />
         </div>
         <div className="answer">
           <label> here give a correct answer</label>
-          <input type="text" value={correctAnswer} onChange={(e) => setCorrectAnswer(e.target.value)} />
+          <input type="text" value={questionAnswer.answer} onChange={(e) => setQuestionAnswer({answer: e.target.value})} />
         </div>
 
         <div className="btn_box">
           <button onClick={() => setCreateClicked(true)}>create</button>
-          <button>discard</button>
+          <button onClick={() => setQuestionAnswer({question: '', answer: ''})}>discard</button>
+        </div>
         </div>
 
         <section>
@@ -146,10 +148,12 @@ export default function FlashCreate({
               newCollectionClick
                 ? (
                   <>
-                    <label>
-                      Add name of your collection
-                    </label>
-                    <input value={collection_name} onChange={(e) => setCollection_name(e.target.value)} />
+                    <input 
+                    className="inputNameCollection" 
+                    placeholder="Add name of your collection.."
+                    value={collection_name} 
+                    onChange={(e) => setCollection_name(e.target.value)} 
+                    />
                     <button onClick={() => setAddClick(true)}>Add</button>
 
                   </>
@@ -159,6 +163,5 @@ export default function FlashCreate({
           </div>
         </section>
       </form>
-    </div>
   );
 }

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import FlashCreate from './FlashCreate';
 import FlashStudy from './FlashStudy';
 import FlashCollection from './FlashCollection';
-// import FlashTest from './FlashTest';
+
 
 const url = 'http://localhost:3000';
 
@@ -85,7 +85,7 @@ export default function Display(
           flashcardCollection={flashcardCollection}
         ></FlashStudy>)}
       
-{ testClick && (
+{/* { testClick && (
         <FlashStudy
         identifier='Test'
         addFlashcard={addFlashcard}
@@ -96,7 +96,7 @@ export default function Display(
         handleClick_oldCollection={handleClick_oldCollection}
         collectionId={collectionId}
         flashcardCollection={flashcardCollection}
-        ></FlashStudy>)}
+        ></FlashStudy>)} */}
       
 { viewCollectionClick && (
         <FlashCollection

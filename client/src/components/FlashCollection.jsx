@@ -4,7 +4,7 @@ export default function FlashCollection({ flashcardCollection, collectionList })
     return (
         <>        
         <div className="all_display">
-        <div className="collections_yard">
+        <div className="collections_yard_flash">
             <div className="individual_collection_set">
                 {collectionList.map((value)=>{
                     return (
@@ -13,7 +13,7 @@ export default function FlashCollection({ flashcardCollection, collectionList })
                 })}                
             </div>           
         </div>
-        <div className="collections_yard">
+        <div className="collections_yard_colle">
         <div className="individual_flash_set">
                 {flashcardCollection.map((value) => {
                     return (

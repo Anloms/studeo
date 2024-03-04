@@ -7,6 +7,7 @@
 .form_layout {
     display: flex;
     flex-direction: row;
+
 }
 
 ul {
@@ -17,7 +18,7 @@ ul {
     display: flex;
     flex-direction: column;
     margin-top: 10%;
-    margin-left: 7em;
+    margin-left: 15%;
     background-color: rgb(187, 238, 187);
     border-radius: 15px 15px;
     padding: 2%;
@@ -34,4 +35,8 @@ ul {
 .startBtn {
     width: 30em;
     margin-left: 10%;
+}
+
+.dropdownBtn {
+    margin-left: 1.8em;
 }

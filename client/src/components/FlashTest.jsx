@@ -24,6 +24,8 @@ export default function FlashTest({
             }
         })
   })
+
+  
   const filteredCollection = flashcardCollection.filter(card => dataArray.includes(card._id));
 
   
