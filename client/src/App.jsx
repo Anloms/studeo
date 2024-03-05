@@ -98,7 +98,13 @@ function App() {
     <>
       <Header />
       <main>
-      <NavBar handleClick={handleClick} />
+      <NavBar 
+      handleClick={handleClick} 
+      homeClick={homeClick}
+      viewCollectionClick={viewCollectionClick}
+      createClick={createClick}
+      studyClick={studyClick}
+      />
         <Display
           addFlashcard={addFlashcard}
           addCollection={addCollection}

@@ -1,29 +1,48 @@
 .questionnaire {
     display: flex;
     flex-direction: row;
-    height: 28em;
+    height: 40em;
 }
 
 .form_layout {
     display: flex;
     flex-direction: row;
+    padding-top: 6em;
 
 }
 
 ul {
     list-style-type: none;
+    text-align: center;
+    padding-top: 1em;
+}
+
+li {
+    padding-bottom: 1em;
 }
 
 .selections {
     display: flex;
     flex-direction: column;
+    width: 10%;
     margin-top: 10%;
     margin-left: 15%;
     background-color: rgb(187, 238, 187);
     border-radius: 15px 15px;
     padding: 2%;
-    height: 52%;
+    height: 67%;
 
+}
+
+
+
+.Selected {
+    text-align: center;
+    background-color: rgb(53, 141, 53);
+    border-radius: 15px 15px;
+    color: beige;
+    padding: 1em;
+    margin-bottom: 2em;
 }
 
 .selections div {

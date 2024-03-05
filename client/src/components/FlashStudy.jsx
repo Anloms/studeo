@@ -78,18 +78,12 @@ export default function FlashStudy({
                         
                     </div>
 
-                             
-               <div className="manual_auto">
-               <Manual_Auto_Btn
-               handleAuto={handleAuto}
-               handleManual={handleManual}
-               ></Manual_Auto_Btn>
-               </div>
+            
                 </div>
             </form>
             <div className="selections">
                 <div>
-                    
+                    <label className='Selected'>Selections</label>
                         <ul>
                         {selectedSet.map((value)=>{
                             let temp;
@@ -107,11 +101,6 @@ export default function FlashStudy({
                         })}
                       
                     </ul>
-                </div>
-                <div>
-                    {/* <p>Selected: </p> */}
-                    {manual && (<p> manual</p>)}
-                    {auto && (<p>  auto</p>)}                    
                 </div>
             </div>
         </div>)}

@@ -19,6 +19,11 @@ button {
     background-color: rgb(255, 255, 161);
     padding: 2em;
     border-radius: 15px 15px;
+    font-weight: 700;
+    color: rgb(161, 123, 123);
+}
 
-
+.highlighted {
+    background-color: rgb(241, 171, 43);
+    color: rgb(245, 239, 230);
 }
