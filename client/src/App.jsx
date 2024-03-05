@@ -11,7 +11,7 @@ function App() {
 
   const [createClick, setCreateClick] = useState(false);
   const [studyClick, setStudyClick] = useState(false);
-  const [testClick, setTestClick] = useState(false);
+  const [homeClick, setHomeClick] = useState(false);
   const [viewCollectionClick, setViewCollection] = useState(false);
 
   const [collectionList, setCollectionList] = useState('');
@@ -20,25 +20,25 @@ function App() {
     if (id === 'create') {
       setCreateClick(true);
       setStudyClick(false);
-      setTestClick(false);
+      setHomeClick(false);
       setViewCollection(false);
     }
     if (id === 'study') {
       setCreateClick(false);
       setStudyClick(true);
-      setTestClick(false);
+      setHomeClick(false);
       setViewCollection(false);
     }
-    if (id === 'test') {
+    if (id === 'home') {
       setCreateClick(false);
       setStudyClick(false);
-      setTestClick(true);
+      setHomeClick(true);
       setViewCollection(false);
     }
     if (id === 'view') {
       setCreateClick(false);
       setStudyClick(false);
-      setTestClick(false);
+      setHomeClick(false);
       setViewCollection(true);
     }
   }
@@ -97,20 +97,19 @@ function App() {
   return (
     <>
       <Header />
-
       <main>
-        <NavBar handleClick={handleClick} />
+      <NavBar handleClick={handleClick} />
         <Display
           addFlashcard={addFlashcard}
           addCollection={addCollection}
           createClick={createClick}
-          testClick={testClick}
+          homeClick={homeClick}
           viewCollectionClick={viewCollectionClick}
           studyClick={studyClick}
           collectionList={collectionList}
           flashcardCollection={flashcardCollection}
         />
-      </main>
+      </main>      
     </>
   );
 }

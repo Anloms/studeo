@@ -1,8 +1,11 @@
 import './CSS/Display.css';
 import { useState } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import FlashCreate from './FlashCreate';
 import FlashStudy from './FlashStudy';
 import FlashCollection from './FlashCollection';
+import Default from './Default';
 
 
 const url = 'http://localhost:3000';
@@ -14,7 +17,7 @@ export default function Display(
     viewCollectionClick,
     createClick,
     studyClick,
-    testClick,
+    homeClick,
     collectionList,
     flashcardCollection
     }
@@ -59,7 +62,6 @@ export default function Display(
 
   return (
     <div className="display">
-      { /* <h1>DISPLAY - prepare text briefly explaining how to use the app</h1> */ }
       { createClick && (
         <FlashCreate
           addFlashcard={addFlashcard}
@@ -72,7 +74,7 @@ export default function Display(
           handleClick_oldCollection={handleClick_oldCollection}
         ></FlashCreate>)}
       
-{ studyClick && (
+      { studyClick && (
         <FlashStudy
           identifier='Study'
           addFlashcard={addFlashcard}
@@ -85,24 +87,18 @@ export default function Display(
           flashcardCollection={flashcardCollection}
         ></FlashStudy>)}
       
-{/* { testClick && (
-        <FlashStudy
-        identifier='Test'
-        addFlashcard={addFlashcard}
-        collectionList={collectionList}
-        handleCollectionUpdate={handleCollectionUpdate}
-        handleDropDown_addId={handleDropDown_addId}
-        oldCollectionClick={oldCollectionClick}
-        handleClick_oldCollection={handleClick_oldCollection}
-        collectionId={collectionId}
-        flashcardCollection={flashcardCollection}
-        ></FlashStudy>)} */}
-      
-{ viewCollectionClick && (
+      { homeClick && (
+        <Default />
+       )}
+      <DndProvider backend={HTML5Backend}>
+
+      { viewCollectionClick && (
         <FlashCollection
           collectionList={collectionList}
           flashcardCollection={flashcardCollection}
+          handleCollectionUpdate={handleCollectionUpdate}
         ></FlashCollection>)}
+      </DndProvider>
     </div>
   );
 }

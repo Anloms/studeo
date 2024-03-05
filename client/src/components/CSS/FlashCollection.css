@@ -1,7 +1,6 @@
 .all_display {
     display: flex;
     flex-direction: column;
-
 }
 
 .collections_yard_flash,
@@ -36,4 +35,5 @@
     height: 10em;
     width: 10em;
     overflow-y: hidden;
+    cursor: grab;
 }

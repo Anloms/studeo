@@ -1,0 +1,17 @@
+h3 {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    text-align: center;
+    color: orange;
+}
+
+h4 {
+    text-align: center;
+    color: rgb(161, 123, 123);
+    padding-bottom: .7em;
+
+}
+
+strong {
+    color: orange;
+}
