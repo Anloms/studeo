@@ -1,32 +1,35 @@
-<h1>Studeo - flashcard study app</h1>
-<h3>Welcome to studeo</h3>
+studeo
+Overview
+Studeo app is your study buddy. The app allows user to create flashcards and study them effectively.
 
-<h3>Prerequisites</h3>
-<h4>MongoDB needs to be installed and running</h4>
+Features
+View All Flashcards and study them in the carousel.
+CRUD Operations: Add, update, and delete flashcards with ease.
 
+Prerequisites
+Node.js (version 14+ recommended)
+MongoDB (local installation or MongoDB Atlas cluster)
+npm (included with Node.js)
+Local Setup
+# Clone the repository
+git clone https://github.com/Anloms/studeo.git
+cd server 
 
-<h3>Installation and setup</h3>
-<ul>
-<li>fork the repository
-</li>
-<li>
-clone the forked repository to your local machine
-</li>
-<li>
-navigate to the server directory and install dependencies with npm install
-</li>
-<li>
-navigate to the client directory and install dependencies with npm install
-</li>
-<li>
-start backend server with command nodemon index.js
-</li>
-<li>
-start the client with command npm run dev
-</li>
-<li>
-make sure MongoDB is running
-</li>
-</ul>
+# Install dependencies
+npm install
 
-<h3>You're ready to go!</h3>
+# Setup environment variables
+echo "MONGODB_URI=mongodb://localhost:27017/flashcards" >> .env
+echo "PORT=3000" >> .env
+# Note: Replace the MONGODB_URI value if using a remote MongoDB database.
+
+# Start the backend server
+nodemon
+# Access the server at http://localhost:3000 (or the custom PORT you've set)
+
+# Setup frontend (if separate)
+cd client
+npm install
+npm run dev
+# Your default web browser should open the application automatically.
+
