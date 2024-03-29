@@ -27,9 +27,9 @@ echo "PORT=3000" >> .env
 
 ### Start the backend server
 nodemon
-## Access the server at http://localhost:3000 (or the custom PORT you've set)
+### Access the server at http://localhost:3000 (or the custom PORT you've set)
 
-## Setup frontend (if separate)
+### Setup frontend (if separate)
 cd client
 npm install
 npm run dev
