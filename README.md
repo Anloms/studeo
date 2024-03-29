@@ -1,12 +1,13 @@
-studeo
-Overview
+##studeo
+
+#Overview
 Studeo app is your study buddy. The app allows user to create flashcards and study them effectively.
 
-Features
+#Features
 View All Flashcards and study them in the carousel.
 CRUD Operations: Add, update, and delete flashcards with ease.
 
-Prerequisites
+#Prerequisites
 Node.js (version 14+ recommended)
 MongoDB (local installation or MongoDB Atlas cluster)
 npm (included with Node.js)
