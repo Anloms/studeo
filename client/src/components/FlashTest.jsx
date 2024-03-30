@@ -24,10 +24,8 @@ export default function FlashTest({
             }
         })
   })
-
   
   const filteredCollection = flashcardCollection.filter(card => dataArray.includes(card._id));
-
   
   const currentCard = filteredCollection.length > 0 && currentIndex >= 0 && currentIndex < filteredCollection.length 
     ? filteredCollection[currentIndex] 
@@ -41,8 +39,7 @@ export default function FlashTest({
     setCurrentIndex((previous)=> ((previous < dataArray.length-1) ? previous+1 : dataArray.length-1)) 
   }
     
-    return (
-        
+    return (        
         <div className="quiz_container">
     {currentCard && (
       <div>
@@ -52,9 +49,6 @@ export default function FlashTest({
           <button>Wrong answer</button>
           <button>Wrong answer</button>
           <button>Wrong answer</button>
-
-
-
         <Previous_Next
         handleNextIndex={handleNextIndex}
         handlePreviousIndex={handlePreviousIndex}

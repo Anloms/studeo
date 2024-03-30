@@ -1,18 +1,19 @@
 const mongoose = require('./index.model.js');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const FlashcardSchema = new Schema({
-    question: {
-        type: String,
-        required: [true, "text is required"]
-    },
-    correctAnswer: {
-        type:String,
-        required: [true, 'text is required']
-    }
+	question: {
+		type: String,
+		required: [true, 'text is required'],
+	},
+	correctAnswer: {
+		type: String,
+		required: [true, 'text is required'],
+	},
 
-}) 
+});
 
-const Flashcard = mongoose.model('FlashcardSchema', FlashcardSchema)
+const Flashcard = mongoose.model('FlashcardSchema', FlashcardSchema);
 
 module.exports = Flashcard;

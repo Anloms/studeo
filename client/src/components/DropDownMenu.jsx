@@ -14,7 +14,7 @@ export default function DropDownMenu({
                 <ul>
                     {collectionList.map((value) => {                        
                         return (
-                        <li key={ value._id }>
+                        <li key={value._id}>
                             <button  type="submit" className="collectionItem_btn" onClick={() => {
                                 handleDropDown_addId(value._id);
                                 handleClick_oldCollection();
@@ -23,7 +23,7 @@ export default function DropDownMenu({
                             </button>
                         </li>
                         )
-                    })};
+                    })}
                     </ul>
             </div>
         </div>

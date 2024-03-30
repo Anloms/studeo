@@ -3,7 +3,6 @@ import './App.css';
 import Header from './components/Header';
 import NavBar from './components/NavBar';
 import Display from './components/Display';
-import flashcardAPI from './apis/flashcardAPI';
 const url = 'http://localhost:3000';
 
 function App() {
@@ -43,6 +42,20 @@ function App() {
     }
   }
 
+  const handleFetch = () => {
+    fetch(`${url}/flashcards`)
+    .then((response) => {
+      if (response.headers.get('Content-Type').includes('application/json')) {
+        return response.json();
+      }
+      throw new TypeError({ message: 'You are not getting json' });
+    }).then((data)=>{
+      setFlashcardCollection(data);
+    })
+    .catch((error) => {
+      console.log('We have an error here', error);
+    });
+  }
   const addFlashcard = async (flash) => {
     const res = await fetch(`${url}/flashcards`, {
       method: 'POST',
@@ -51,15 +64,9 @@ function App() {
       },
       body: JSON.stringify(flash),
     });
-
     setFlashcardCollection([...flashcardCollection, flash]);
     return await res.json(flashcardCollection);
   };
-  // const addFlashcard =  flashcardAPI.create(flash).then(flash=>{
-  //   setFlashcardCollection([...flashcardCollection, flash]);
-  // }).then(data=>{
-  //   return data.json()
-  // })
 
   const handleFetchCollection = () => {
     fetch(url + `/collections`)
@@ -84,13 +91,12 @@ function App() {
       },
       body: JSON.stringify(flash),
     });
-    return await res.json();
+    setCollectionList([...collectionList, flash])
+    return await res.json(collectionList);
   };
 
   useEffect(() => {
-    flashcardAPI.getAll.then((data) => {
-    setFlashcardCollection(data);
-  })
+    handleFetch();
     handleFetchCollection();
   }, []);
 

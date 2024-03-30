@@ -12,15 +12,14 @@ export default function FlashCreate({
   oldCollectionClick,
   handleClick_oldCollection
 }) {
-  const [questionAnswer, setQuestionAnswer] = useState({question: '', answer: ''});
+  const [question, setQuestion]= useState('');
+  const [correctAnswer, setCorrectAnswer]= useState('');
   const [collection_name, setCollection_name] = useState('');
   const [createClicked, setCreateClicked] = useState(false);
   const [newCollectionClick, setNewCollectionClick] = useState(false);
-  // const [oldCollectionClick, setOldCollectionClick] = useState(false);
   const [justCreateClick, setJustCreateClick] = useState(false);
   const [addClick, setAddClick] = useState(false);
 
-  // Conditionals and toggles
   function conditionalStyle() {
     if (createClicked === true) {
       return 'section_question_alert';
@@ -28,6 +27,10 @@ export default function FlashCreate({
     return 'section_question';
   }
 
+  const clearFormFields = () =>{
+    setQuestion('');
+    setCorrectAnswer('')
+  };
   function handleClick() {
     if (newCollectionClick === true) {
       setNewCollectionClick(false);
@@ -36,10 +39,7 @@ export default function FlashCreate({
     }
   }
  
-  // handlers
   function handleJustCreate() {
-    let question = questionAnswer.question, correctAnswer = questionAnswer.answer;
-    
     const newFlashCard = {
       question,
       correctAnswer
@@ -47,13 +47,12 @@ export default function FlashCreate({
     addFlashcard(newFlashCard);
     setJustCreateClick(false);
  
-    setQuestionAnswer({question: '', answer: ''})
+    setCorrectAnswer('');
+    setQuestion('');
     setCreateClicked(false);
   }
-
+  
   async function handleUpdate_oldCollection() {
-    let question = questionAnswer.question, correctAnswer = questionAnswer.answer;
-    
     const newFlashCard = {
       question,
       correctAnswer
@@ -62,18 +61,15 @@ export default function FlashCreate({
     const collVar = await collectionId;
 
     handleClick_oldCollection();
-    handleCollectionUpdate(flashVar._id, collVar);// change format of this function
+    handleCollectionUpdate(flashVar._id, collVar);
     
-    handleDropDown_addId()
-    // setQuestion('');
-    // setCorrectAnswer('');
-    setQuestionAnswer({question: '', answer: ''})
+    setQuestion('');
+    handleDropDown_addId('')
+    setCorrectAnswer('');
     setCreateClicked(false);
   }
   
-  async function handleUpdate_newCollection() {
-    let question = questionAnswer.question, correctAnswer = questionAnswer.answer;
-    
+  async function handleUpdate_newCollection() {    
     const newFlashCard = {
       question,
       correctAnswer
@@ -88,12 +84,12 @@ export default function FlashCreate({
     const collectionVar = await addCollection(newCollection);
     handleCollectionUpdate(flashVar._id, collectionVar._id);
 
-    // state reset
-    handleDropDown_addId()
+    handleDropDown_addId('')
     handleClick();
-    setCreateClicked();
+    setCreateClicked(false);
     setAddClick(false);
-    setQuestionAnswer({question: '', answer: ''})
+    setCorrectAnswer('');
+    setQuestion('');
   }
 
   function handleSubmit(event) {
@@ -111,22 +107,24 @@ export default function FlashCreate({
     }
   }
 
-  return (
-    
+  return (    
       <form onSubmit={handleSubmit} id="formField">
         <div className="create_discard_field">
         <div className="question">
           <label>phrase your question</label>
-          <input type="text" value={questionAnswer.question} onChange={(e) => setQuestionAnswer({question: e.target.value})} />
+          <input type="text" value={question} onChange={(e) => setQuestion(e.target.value)} />
         </div>
         <div className="answer">
           <label> here give a correct answer</label>
-          <input type="text" value={questionAnswer.answer} onChange={(e) => setQuestionAnswer({answer: e.target.value})} />
+          <input type="text" value={correctAnswer} onChange={(e) => setCorrectAnswer(e.target.value)} />
         </div>
 
         <div className="btn_box">
           <button onClick={() => setCreateClicked(true)}>create</button>
-          <button onClick={() => setQuestionAnswer({question: '', answer: ''})}>discard</button>
+          <button onClick={() => {
+            setQuestion('')
+            setCorrectAnswer('')
+          }}>discard</button>
         </div>
         </div>
 
@@ -143,6 +141,7 @@ export default function FlashCreate({
               handleDropDown_addId={handleDropDown_addId}
               handleClick_oldCollection={handleClick_oldCollection}
               name="Existing Collection"
+              clearFormFields={clearFormFields}
             />
             {
               newCollectionClick
@@ -155,7 +154,6 @@ export default function FlashCreate({
                     onChange={(e) => setCollection_name(e.target.value)} 
                     />
                     <button onClick={() => setAddClick(true)}>Add</button>
-
                   </>
                 )
                 : (<button onClick={handleClick}>new collection</button>)

@@ -16,12 +16,15 @@
     margin-bottom: 5em;
 }
 
-.individual_collection_set {
+.individual_flash_set ul {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 90%;
+    list-style-type: none;
+
 }
+
 
 .individual_flash_set {
     display: flex;
@@ -32,8 +35,8 @@
 }
 
 .flashcard_solo {
-    height: 10em;
-    width: 10em;
-    overflow-y: hidden;
+    height: 12em;
+    width: 12em;
     cursor: grab;
+    overflow-y: hidden;
 }

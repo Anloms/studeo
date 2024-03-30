@@ -8,5 +8,12 @@
 main {
   display: flex;
   flex-direction: row;
- 
+  background-color: rgb(239, 146, 53);
+}
+
+h2 {
+  color: beige;
+  font-size: 10em;
+  margin-top: 2em;
+  margin-left: 3em;
 }

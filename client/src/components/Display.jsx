@@ -32,13 +32,12 @@ export default function Display(
       setOldCollectionClick(true);
     }
   }
-
   function handleDropDown_addId (dropdownId) {
       setCollectionId(() => dropdownId);
   }
 
   const updateCollection = (flashID, id) => {
-    
+
     fetch(url + `/collections/${id}/edit`, {
       method: 'PUT',
       headers: {
@@ -91,7 +90,6 @@ export default function Display(
         <Default />
        )}
       <DndProvider backend={HTML5Backend}>
-
       { viewCollectionClick && (
         <FlashCollection
           collectionList={collectionList}

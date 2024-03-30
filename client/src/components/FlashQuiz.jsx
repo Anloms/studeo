@@ -1,14 +1,11 @@
 import { useState } from 'react'; 
 import './CSS/FlashQuiz.css';
 import Previous_Next from './buttons/Previous_Next';
-import Manual_Auto_Btn from './buttons/Manual_Auto_Btn';
 
 export default function FlashQuiz({ 
     flashcardCollection, 
     collectionList, 
-    selectedSet, 
-    handleAuto, 
-    handleManual 
+    selectedSet
 }){
 
   const [dataArray, setDataArray] = useState([]);
@@ -29,7 +26,6 @@ export default function FlashQuiz({
   })
   const filteredCollection = flashcardCollection.filter(card => dataArray.includes(card._id));
 
-  
   const currentCard = filteredCollection.length > 0 && currentIndex >= 0 && currentIndex < filteredCollection.length 
     ? filteredCollection[currentIndex] 
     : null;
@@ -52,15 +48,23 @@ export default function FlashQuiz({
   function handleNextIndex(){
     setCurrentIndex((previous)=> ((previous < dataArray.length-1) ? previous+1 : dataArray.length-1)) 
   }
- 
-  console.log(currentIndex)
   return (
     <div className="quiz_container">
     {currentCard && (
       <div>
         <div className="FlashFace">
-          {question && (<button role="button" className='questionToggle' onClick={toggleCard}>{currentCard.question}</button>)}
-          {answer && (<button role="button" className='answerToggle' onClick={toggleCard}>{currentCard.correctAnswer}</button>)}
+          {question && 
+          (<button role="button" 
+                   className='questionToggle' 
+                   onClick={toggleCard}>
+                    <p>{currentCard.question}</p>
+          </button>)}
+          {answer &&
+          (<button role="button" 
+                   className='answerToggle' 
+                   onClick={toggleCard}> 
+                   <p>{currentCard.correctAnswer}</p>
+                   </button>)}
     
         <Previous_Next
         handleNextIndex={handleNextIndex}
@@ -70,10 +74,7 @@ export default function FlashQuiz({
       </div>
     )}
     {!currentCard && <p>No cards available.</p>}
-    <Manual_Auto_Btn
-    handleAuto={handleAuto}
-    handleManual={handleManual}
-    ></Manual_Auto_Btn>
+
   </div>
   );
 }
